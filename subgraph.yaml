@@ -16,17 +16,53 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - AdminChanged
-        - BeaconUpgraded
+        - Approval
+        - ApprovalForAll
+        - BatchMetadataUpdate
+        - BookingResold
+        - EnrollmentLog
+        - Initialized
+        - InventoryItemCreated
+        - MarketItemCreated
+        - MarketItemPayemt
+        - MetadataUpdate
+        - OwnershipTransferred
+        - PrimaryRevenueDistributed
+        - SecondaryRevenueDistributed
+        - Transfer
         - Upgraded
       abis:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: BeaconUpgraded(indexed address)
-          handler: handleBeaconUpgraded
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BatchMetadataUpdate(uint256,uint256)
+          handler: handleBatchMetadataUpdate
+        - event: BookingResold(indexed uint256,indexed address,indexed address,bool,bool,uint256,bool)
+          handler: handleBookingResold
+        - event: EnrollmentLog(indexed uint256,address,uint8)
+          handler: handleEnrollmentLog
+        - event: Initialized(uint64)
+          handler: handleInitialized
+        - event: InventoryItemCreated(indexed uint256,indexed uint256,uint256,string,bool,uint8,uint256)
+          handler: handleInventoryItemCreated
+        - event: MarketItemCreated(indexed uint256,indexed address,indexed address,bool,uint256[],uint8)
+          handler: handleMarketItemCreated
+        - event: MarketItemPayemt(indexed uint256,indexed address,uint256,string)
+          handler: handleMarketItemPayemt
+        - event: MetadataUpdate(uint256)
+          handler: handleMetadataUpdate
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PrimaryRevenueDistributed(indexed uint256,uint256,uint256,uint256)
+          handler: handlePrimaryRevenueDistributed
+        - event: SecondaryRevenueDistributed(indexed address,indexed uint256,uint256,uint256,uint256,uint256)
+          handler: handleSecondaryRevenueDistributed
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
         - event: Upgraded(indexed address)
           handler: handleUpgraded
       file: ./src/contract.ts
